@@ -4,7 +4,7 @@ import {toast} from "react-toastify";
 import AddCourseModal from "../components/AddCourseModal";
 
 const StudentDetail = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [showAddCourseModal, setShowAddCourseModal] = useState(false);
     const [retrievedStudent, setRetrievedStudent] = useState({});
 
@@ -32,8 +32,6 @@ const StudentDetail = () => {
         fetchStudent().catch(() => toast.error('Failed to fetch student'))
     }
 
-    console.log(retrievedStudent.courses)
-
     return (
         <div className="p-4 flex flex-col gap-4">
             <Link to='/students' className="text-white hover:text-slate-300">Back to Students</Link>
@@ -41,13 +39,15 @@ const StudentDetail = () => {
             <div className="flex flex-col gap-4">
                 <div className="flex flex-row justify-between items-center">
                     <h2 className="text-white text-lg">{retrievedStudent.department} Courses</h2>
-                    <button type="button"
-                            onClick={() => setShowAddCourseModal(true)}
-                            className="rounded-full text-base font-normal px-4 py-px bg-blue-400/25 text-blue-400 hover:bg-blue-500/25 transition-all">
-                        Add Course
-                    </button>
+                    {retrievedStudent.courses?.length > 0 && (
+                        <button type="button"
+                                onClick={() => setShowAddCourseModal(true)}
+                                className="rounded-full text-base font-normal px-4 py-px bg-blue-400/25 text-blue-400 hover:bg-blue-500/25 transition-all">
+                            Add Course
+                        </button>
+                    )}
                 </div>
-                <div className="relative overflow-x-auto">
+                {retrievedStudent.courses?.length > 0 ? (
                     <table className="w-full text-sm text-left text-gray-400 rounded-md overflow-hidden">
                         <thead className="text-xs text-gray-300 uppercase bg-neutral-900">
                         <tr>
@@ -72,7 +72,7 @@ const StudentDetail = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {retrievedStudent.courses && retrievedStudent.courses.map((course) => (
+                        {retrievedStudent.courses.map((course) => (
                             <tr key={course.code} className="even:bg-neutral-900 odd:bg-neutral-900/50">
                                 <th className="px-6 py-4">
                                     <div className="text-sm text-white">{course.code}</div>
@@ -90,7 +90,8 @@ const StudentDetail = () => {
                                     </span>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <div className="text-sm text-white"><span className="text-neutral-400">Prof.</span> {course.professor}</div>
+                                    <div className="text-sm text-white"><span
+                                        className="text-neutral-400">Prof.</span> {course.professor}</div>
                                 </td>
                                 <td>
                                     <button type="button" onClick={() => handleDropCourse(course.code)}
@@ -102,9 +103,20 @@ const StudentDetail = () => {
                         ))}
                         </tbody>
                     </table>
-                </div>
+                ) : (
+                    <button
+                        className="w-full h-40 text-neutral-400 border-dashed border border-neutral-500 hover:border-blue-500 bg-neutral-500/5 hover:bg-blue-500/10 transition-all flex justify-center items-center"
+                        onClick={() => setShowAddCourseModal(true)}
+                        >
+                            Add Your First Course
+                    </button>
+                )}
             </div>
-            {showAddCourseModal && <AddCourseModal currentCourses={retrievedStudent.courses} semester={retrievedStudent.semester} handleClose={handleCloseAddCourseModal} />}
+            <div className="relative overflow-x-auto">
+            </div>
+            {showAddCourseModal &&
+                <AddCourseModal currentCourses={retrievedStudent.courses} semester={retrievedStudent.semester}
+                                handleClose={handleCloseAddCourseModal}/>}
         </div>
     );
 }

@@ -1,10 +1,10 @@
 function mapResultToStudentObject(result) {
     return {
-        firstname: result[0].firstname,
-        lastname: result[0].lastname,
-        department: result[0].department_code,
-        semester: result[0].last_enrolled_semester,
-        courses: result.map((course) => {
+        firstname: result.firstname,
+        lastname: result.lastname,
+        department: result.department_code,
+        semester: result.last_enrolled_semester,
+        courses: result.courses?.length > 0 ? result.courses.map((course) => {
             return {
                 code: course.code,
                 semester: course.semester_code,
@@ -12,7 +12,7 @@ function mapResultToStudentObject(result) {
                 creditHours: course.credit_hours,
                 professor: course.firstname
             }
-        })
+        }) : []
     }
 }
 

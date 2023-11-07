@@ -21,11 +21,18 @@ router.get('/', (req, res) => {
  * Get student by id
  */
 router.get('/:id', (req, res) => {
-    connection.query("SELECT S.firstname, S.lastname, S.department_code, S.last_enrolled_semester, C.semester_code, C.name, C.credit_hours, C.code, F.firstname FROM COURSE C JOIN STUDENTCOURSE SC ON C.code = SC.course_id JOIN STUDENT S ON SC.student_code = S.bunet_id JOIN FACULTY F ON C.tutor_id = F.bunet_id WHERE SC.student_code = ?", [req.params.id], (err, results) => {
+    connection.query("SELECT S.firstname, S.lastname, S.department_code, S.last_enrolled_semester FROM STUDENT S WHERE bunet_id = ?", [req.params.id], (err, results) => {
         if (err) {
             res.status(500).json({error: err});
         } else {
-            res.status(200).json(mapResultToStudentObject(results));
+            const student = results[0];
+            connection.query("SELECT C.semester_code, C.name, C.credit_hours, C.code, F.firstname FROM COURSE C JOIN STUDENTCOURSE SC ON C.code = SC.course_id JOIN STUDENT S ON SC.student_code = S.bunet_id JOIN FACULTY F ON C.tutor_id = F.bunet_id WHERE SC.student_code = ?", [req.params.id], (err, results) => {
+                if (err) {
+                    res.status(500).json({error: err});
+                } else {
+                    res.status(200).json(mapResultToStudentObject({...student, courses: results}));
+                }
+            });
         }
     });
 });

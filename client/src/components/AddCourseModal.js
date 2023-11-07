@@ -9,7 +9,6 @@ const AddCourseModal = ({ handleClose, currentCourses, semester }) => {
     const fetchSemesterCourses = async () => {
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/semesters/${semester}/courses`);
         const data = await response.json();
-        console.log(data)
 
         const filteredData = data.filter((course) => {
             return !currentCourses.some((currentCourse) => currentCourse.code === course.code);
