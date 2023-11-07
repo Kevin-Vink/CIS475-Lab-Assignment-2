@@ -10,7 +10,12 @@ function mapResultToStudentObject(result) {
                 semester: course.semester_code,
                 name: course.name,
                 creditHours: course.credit_hours,
-                professor: course.firstname
+                professor: {
+                    firstname: course.firstname,
+                    lastname: course.lastname,
+                    office: course.office,
+                    email: course.email,
+                }
             }
         }) : []
     }

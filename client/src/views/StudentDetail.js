@@ -90,8 +90,20 @@ const StudentDetail = () => {
                                     </span>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <div className="text-sm text-white"><span
-                                        className="text-neutral-400">Prof.</span> {course.professor}</div>
+                                    <div className="text-sm text-white flex gap-x-1 group">
+                                        <span className="text-neutral-400">Prof.</span>
+                                        {course.professor.firstname}
+                                        <div className="absolute group-hover:opacity-100 group-hover:pointer-events-auto transition-all opacity-0 pointer-events-none translate-y-8 z-20 flex flex-col gap-2 p-4 shadow-md border border-neutral-500 bg-neutral-900 rounded-md">
+                                            <span className="absolute z-30 -top-[12px] left-8 border-x-transparent border-x-[12px] border-b-[12px] border-b-neutral-500" />
+                                            <span className="text-sm text-white flex gap-x-1">
+                                            <p>Prof.</p>
+                                            <p>{course.professor.firstname}</p>
+                                            <p>{course.professor.lastname}</p>
+                                        </span>
+                                            <a href={`mailto:${course.professor.email.toLowerCase()}`} className="text-sm text-blue-400">{course.professor.email.toLowerCase()}</a>
+                                            <span className="text-sm text-white">({course.professor.office})</span>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <button type="button" onClick={() => handleDropCourse(course.code)}
@@ -107,8 +119,8 @@ const StudentDetail = () => {
                     <button
                         className="w-full h-40 text-neutral-400 border-dashed border border-neutral-500 hover:border-blue-500 bg-neutral-500/5 hover:bg-blue-500/10 transition-all flex justify-center items-center"
                         onClick={() => setShowAddCourseModal(true)}
-                        >
-                            Add Your First Course
+                    >
+                        Add Your First Course
                     </button>
                 )}
             </div>
