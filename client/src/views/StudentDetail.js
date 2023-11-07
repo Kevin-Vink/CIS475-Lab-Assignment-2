@@ -34,7 +34,7 @@ const StudentDetail = () => {
 
     return (
         <div className="p-4 flex flex-col gap-4">
-            <Link to='/students' className="text-white hover:text-slate-300">Back to Students</Link>
+            <Link to='/' className="text-white hover:text-slate-300">Back to Students</Link>
             <h1 className="text-2xl font-bold text-white capitalize">{retrievedStudent.firstname} {retrievedStudent.lastname} Details</h1>
             <div className="flex flex-col gap-4">
                 <div className="flex flex-row justify-between items-center">

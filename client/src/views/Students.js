@@ -100,7 +100,7 @@ function Students() {
                                 </td>
                                 <td className="px-6 py-4 flex gap-x-6 w-full">
                                     <Link
-                                        to={`/students/${student.bunet_id}`}
+                                        to={`/${student.bunet_id}`}
                                         className="rounded-full px-4 py-px bg-gray-300/25 text-gray-300 hover:bg-gray-400/25 transition-all">
                                         View Details
                                     </Link>
