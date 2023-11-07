@@ -46,14 +46,11 @@ function Students() {
     }
 
     return (
-        <div className="bg-neutral-800 p-4 flex flex-col gap-4">
-            <div className="flex flex-row justify-between items-center">
-                <h1 className="text-xl font-bold text-white">Students</h1>
-                <button type="button" onClick={() => setShowAddStudentModal(!showAddStudentModal)}
-                        className="rounded-full text-base font-normal px-4 py-px bg-blue-400/25 text-blue-400 hover:bg-blue-500/25 transition-all">
-                    Add Student
-                </button>
-            </div>
+        <div className="bg-neutral-800 px-8 py-6 flex flex-col gap-4">
+            <button type="button" onClick={() => setShowAddStudentModal(!showAddStudentModal)}
+                    className="rounded-full w-fit flex self-end text-base font-normal px-4 py-px bg-blue-400/25 text-blue-400 hover:bg-blue-500/25 transition-all">
+                Add Student
+            </button>
             {students.length > 0 ? (
                 <div className="relative overflow-x-auto">
                     <table className="w-full text-sm text-left text-gray-400 rounded-md overflow-hidden">
@@ -96,7 +93,8 @@ function Students() {
                                     <a href={`mailto:${student.email}`}>{student.email}</a>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <span className="px-3 py-1 bg-green-500/25 text-green-500 rounded-full">{student.GPA}</span>
+                                    <span
+                                        className="px-3 py-1 bg-green-500/25 text-green-500 rounded-full">{student.GPA}</span>
                                 </td>
                                 <td className="px-6 py-4 flex gap-x-6 w-full">
                                     <Link
