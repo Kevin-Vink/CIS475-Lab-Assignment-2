@@ -45,8 +45,8 @@ CREATE TABLE STUDENT(
     department_code VARCHAR(25),
     last_enrolled_semester VARCHAR(25),
 
-    FOREIGN KEY (department_code) REFERENCES DEPARTMENT(name) ON UPDATE CASCADE,
-    FOREIGN KEY (last_enrolled_semester) REFERENCES SEMESTER(code) ON UPDATE CASCADE
+    FOREIGN KEY (department_code) REFERENCES DEPARTMENT(name) on update cascade on delete cascade,
+    FOREIGN KEY (last_enrolled_semester) REFERENCES SEMESTER(code) on update cascade on delete cascade
 );
 
 CREATE TABLE STUDENTCOURSE(
@@ -55,9 +55,9 @@ CREATE TABLE STUDENTCOURSE(
     semester_code VARCHAR(25) NOT NULL,
 
     PRIMARY KEY (course_id, student_code, semester_code),
-    FOREIGN KEY (course_id) REFERENCES COURSE(code) ON UPDATE CASCADE,
-    FOREIGN KEY (student_code) REFERENCES STUDENT(bunet_id) ON UPDATE CASCADE,
-    FOREIGN KEY (semester_code) REFERENCES SEMESTER(code) ON UPDATE CASCADE
+    FOREIGN KEY (course_id) REFERENCES COURSE(code) on update cascade on delete cascade,
+    FOREIGN KEY (student_code) REFERENCES STUDENT(bunet_id) on update cascade on delete cascade,
+    FOREIGN KEY (semester_code) REFERENCES SEMESTER(code) on update cascade on delete cascade
 );
 
 INSERT INTO DEPARTMENT (name, full_name, location, budget)

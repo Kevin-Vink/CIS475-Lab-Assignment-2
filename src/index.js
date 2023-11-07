@@ -17,7 +17,10 @@ app.options("*", cors({origin: true, credentials: true}));
 app.use(bodyParser.json());
 
 // Routes
-
+app.use('/api/students', require('./routes/studentRoutes'));
+app.use('/api/courses', require('./routes/courseRoutes'));
+app.use('/api/departments', require('./routes/departmentRoutes'));
+app.use('/api/semesters', require('./routes/semesterRoutes'));
 
 // Start server
 const port = process.env.PORT || 8080;
