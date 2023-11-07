@@ -101,7 +101,7 @@ const StudentDetail = () => {
                                             <p>{course.professor.lastname}</p>
                                         </span>
                                             <a href={`mailto:${course.professor.email.toLowerCase()}`} className="text-sm text-blue-400">{course.professor.email.toLowerCase()}</a>
-                                            <span className="text-sm text-white">({course.professor.office})</span>
+                                            <span className="text-sm text-white">({course.professor.office}) in <strong>{course.professor.building}</strong></span>
                                         </div>
                                     </div>
                                 </td>

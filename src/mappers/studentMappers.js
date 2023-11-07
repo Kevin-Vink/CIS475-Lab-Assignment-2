@@ -15,6 +15,7 @@ function mapResultToStudentObject(result) {
                     lastname: course.lastname,
                     office: course.office,
                     email: course.email,
+                    building: course.location
                 }
             }
         }) : []
